@@ -1,0 +1,29 @@
+
+<div class="animated zoomIn" >
+    <div class="card card-accent-primary">
+            <div class="card-header">
+                <h2 class="text-center">ادراج</h2>
+            </div>
+     <div class="card-body">
+
+        <div class="col-md-6 user-container">
+
+
+            <form [formGroup]="addFormFonction" (ngSubmit)="onSubmit()">
+
+
+              <div class="form-group">
+                <label for="libellefonction">التسميـــــة:</label>
+                <input formControlName="libelle_fonction"  name="libelle_fonction" class="form-control" id="libellefonction">
+              </div>
+
+              <button [disabled]="!addFormFonction.valid" class="btn btn-success" ><i class="icon-plus"></i></button>
+
+            </form>
+        </div>
+
+    </div>
+
+    </div>
+
+    </div>

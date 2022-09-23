@@ -1,0 +1,30 @@
+
+<div class="animated zoomIn">
+  <div class="card card-accent-primary">
+    <div class="card-header">
+      <h2 class="text-center"> إدراج مبيت</h2>
+    </div>
+    <div class="card-body">
+
+      <div class="col-md-6 user-container">
+
+
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label for="nomFoyer">إسم المبيت:</label>
+            <input formControlName="nomFoyer" name="nomFoyer" class="form-control" id="nomFoyer">
+          </div>
+          <div class="form-group">
+            <label for="capaciteFoyer"> عدد الأسرة:</label>
+            <input type="number" formControlName="capaciteFoyer" name="capaciteFoyer" class="form-control" id="capaciteFoyer">
+          </div>
+          <button [disabled]="!addForm.valid" class="btn btn-success"><i class="icon-plus"></i></button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

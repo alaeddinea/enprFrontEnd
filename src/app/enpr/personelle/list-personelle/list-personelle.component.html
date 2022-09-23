@@ -1,0 +1,111 @@
+<p-toast position="ui-toast-center"></p-toast>
+<div class="animated zoomIn">
+    <p-table id="ourTbale" [value]="entities" [rowsPerPageOptions]="[5,10,20]" #dt selectionMode="single" [paginator]="true" [rows]="10"
+        [globalFilterFields]="['cinEl',
+        'prenom',
+        'nom',
+        'matricule'
+       ]">
+        <ng-template pTemplate="caption">
+
+            <h2 class="text-center">قائمة الموظفين   </h2>
+
+
+            <div style="text-align: right">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="محرك البحث "
+                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th [pSortableColumn]="cinEl">الرقم الإداري
+                    <p-sortIcon [field]="cinEl" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+            
+                <th [pSortableColumn]="grade"> المعرف الوحيد
+                  <p-sortIcon [field]="grade" ariaLabel="Activate to sort"
+                      ariaLabelDesc="Activate to sort in descending order"
+                      ariaLabelAsc="Activate to sort in ascending order">
+                  </p-sortIcon>
+              </th>
+                <th [pSortableColumn]="nomEl"> الإسم
+                    <p-sortIcon [field]="nomEl" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="prenomEl"> اللقب
+                    <p-sortIcon [field]="prenomEl" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="session"> إسم الأب
+                    <p-sortIcon [field]="session" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="session">   تاريخ التقاعد
+                    <p-sortIcon [field]="session" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+             <th [pSortableColumn]="group">  
+                    <p-sortIcon [field]="group" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+                   
+                <th><button class="btn btn-primary" style="width:50px" (click)="addConge()"> <i class="icon-plus"></i>
+                    </button>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+            <tr>
+             
+
+              <td > <div  *ngIf="row.matricule">{{row.matricule}}</div></td>
+              <td > <div *ngIf="row.cnrps" >{{row.cnrps}} </div></td>
+              <td > <div  *ngIf="row.prenom">{{row.prenom}}</div></td>
+              <td > <div *ngIf="row.nom" >{{row.nom}} </div></td>
+              <td > <div  *ngIf="row.nom_pere">{{row.nom_pere}}</div></td>
+              <td > <div *ngIf="row.date_retraite" >{{row.date_retraite}} </div></td>
+
+                <td>
+                    <button class="btn btn-info" (click)="detailsEleve(row)"> <i class="icon-info"></i>الملف الشخصي </button>
+
+
+            </td>
+                <td>
+                    <button class="btn btn-danger" (click)="delete(row)"> <i class="icon-trash"></i></button>
+                    <button class="btn btn-success" (click)="edit(row)" style="margin-left: 20px;"> <i
+                            class="icon-pencil"></i></button>
+                </td>
+                <!-- <td>
+                    <div style="text-align: left">
+
+                        <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="printexportPdf(row)"
+                            class="ui-button-warning"></button>
+
+                    </div>
+                </td>-->
+            </tr>
+        </ng-template>
+
+    </p-table>
+    <div style="text-align: center" *ngIf="!entities">
+
+        <img class="img-circle" src="assets/img/avatars/lod3.gif">
+
+</div>
+
+
+</div>

@@ -1,0 +1,75 @@
+<div class="card card-accent-primary">
+    <div class="card-header">
+      <h2 class="text-center">إدراج </h2>
+    </div>
+    <div class="card-body">
+      <div class="col-md-6 user-container">
+
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+          <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-4">
+                رقم الدورة *:
+              </div>
+              <div class="ui-grid-col-8">
+                <input type="number" formControlName="numSession" name="numSession" class="form-control" id="numSession">
+              </div>
+            </div>
+
+
+
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-4">
+                إسم الدورة *:
+              </div>
+              <div class="ui-grid-col-8">
+                <input type="text" formControlName="nomSession" name="nomSession" class="form-control" id="nomSession">
+
+              </div>
+            </div>
+
+
+
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-4">
+                الحالة *:
+              </div>
+              <div class="ui-grid-col-8">
+
+                <p-dropdown [options]="etatSession" formControlName="etatSession"></p-dropdown>
+              </div>
+            </div>
+
+
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-4">
+                تاريخ فتح الدورة *:
+              </div>
+              <div class="ui-grid-col-8">
+                <input value="{{dtOvSessionEleve}}" type="date" formControlName="dtOvSession" name="dtOvSession" class="form-control" id="dtOvSession">
+              </div>
+            </div>
+
+
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-4">
+                تاريخ إنتهاء الدورة *:
+              </div>
+              <div class="ui-grid-col-8">
+                <input value="{{dtFrSessionEleve}}" type="date" formControlName="dtFrSession"  name="dtFrSession"
+                  class="form-control" id="dtFrSession">
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <p-button type="ngSubmit" icon="pi pi-plus" label="نسجيل"></p-button>
+
+        </form>
+      </div>
+
+    </div>
+
+  </div>

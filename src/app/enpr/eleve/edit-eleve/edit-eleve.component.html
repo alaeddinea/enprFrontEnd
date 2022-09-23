@@ -1,0 +1,579 @@
+<div class="animated zoomIn">
+    <div class="card card-accent-primary">
+        <div class="card-header">
+            <h3 class="text-center"> الهوية الشخصية للتلميذ </h3>
+        </div>
+        <div class="card-body">
+            <div class="col-md-12 user-container">
+                <input type="file" (change)="onFileChanged($event)">
+                <div class="text-center" *ngIf="!imageBlob">
+                    <img class="img-circle" height="100" width="100" src="assets/img/avatars/lod.gif">
+                </div>
+                <div class="text-center" *ngIf=imageBlob>
+                    <img class="rounded-circle" height="100" width="100"  src="data:image/png;base64,{{imageBlob}}">
+                </div>
+                <form [formGroup]="addForm">
+                    <mat-horizontal-stepper [linear]="false" #stepper>
+
+                        <mat-step [stepControl]="addForm">
+
+                            <ng-template matStepLabel>الهوية</ng-template>
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12 ui-md-3">
+                                <!--    <img    src="data:image/png;base64,{{imageBlob}}" alt="" style="width: 30 pxs;" *ngIf="imageBlob"   alt="Avatar" style="width:70px">-->
+                               
+                                <mat-form-field>
+                                        <input matInput type="number" formControlName="cinEl"
+                                            placeholder="رقم بطاقة التعريف الوطنية" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>calendar_today</mat-icon>
+                                        <input matInput type="date" formControlName="dateCinEl"
+                                            placeholder="تاريخ إصدار   بطاقة التعريف الوطنية" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-radio-group  formControlName="sexeEl"
+                                        aria-label="الجنس">
+                                        <mat-radio-button value="0">ذكر</mat-radio-button>
+                                        <mat-radio-button value="1">أنى</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-2">
+                                    <mat-icon matSuffix>how_to_vote</mat-icon>
+                                    <p-dropdown [options]="etatcivils" placeholder=" الحالة المدنية"
+                                        formControlName="etatcivil" [filter]="true" id="etatcivil"
+                                        name="etatcivil">
+                                    </p-dropdown>
+
+                                </div>
+                            </div>
+
+                            <div class="ui-g ui-fluid">
+
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>how_to_reg</mat-icon>
+                                        <input matInput formControlName="prenomEl" placeholder=" الإسم" required>
+
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>how_to_reg</mat-icon>
+                                        <input matInput formControlName="nomEl" placeholder="اللقب " required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>calendar_today</mat-icon>
+                                        <input matInput formControlName="datenaissanceEl " value="{{datenaissanceEleve}}" type="date"
+                                            placeholder="تاريخ الولادة" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix> pin_drop</mat-icon>
+                                        <input matInput formControlName="lieuNaissanceEl" placeholder=" مكان الولادة"
+                                            required>
+                                    </mat-form-field>
+                                </div>
+
+
+                            </div>
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix> email</mat-icon>
+                                        <input matInput formControlName="mailEl" type="email"
+                                            placeholder=" البريد الإلكتروني" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+
+                                        <mat-icon matSuffix>perm_phone_msg</mat-icon>
+
+                                        <input matInput formControlName="telFamilleEl" type="tel"
+                                            placeholder="رقم الهاتف العائلي " required>
+
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>settings_phone</mat-icon>
+                                        <input matInput formControlName="fixeFamilleEl" type="tel"
+                                            placeholder="رقم الهاتف العائلي القار " required>
+
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix> contact_phone</mat-icon>
+                                        <input matInput formControlName="telEl" type="tel"
+                                            placeholder="رقم الهاتف الشخصي " required>
+
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <div>
+
+                                <button mat-raised-button matStepperNext color="primary">التالى<mat-icon>skip_previous
+                                    </mat-icon></button>
+
+                            </div>
+
+                        </mat-step>
+
+                        <mat-step [stepControl]="addForm">
+
+                            <ng-template matStepLabel>الإنتداب</ng-template>
+
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12 ui-md-3">
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-icon matSuffix>folder_shared</mat-icon>
+                                            <input matInput formControlName="numDossierRecrueEl" type="number"
+                                                placeholder="رقم ملف الإنتداب" required>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div>
+                                        <mat-radio-group (change)="radioChange($event)" formControlName="categorie"
+                                            aria-label="الهيأة">
+                                            <mat-radio-button value="مدني">مدني</mat-radio-button>
+                                            <mat-radio-button value="نظامي">نظامي</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                    <div>
+                                        <p-dropdown [options]="grade" placeholder=" إختيار الرتية الإنتداب"
+                                            formControlName="grade" [filter]="true" id="grade" name="grade">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>calendar_today</mat-icon>
+                                        <input  readonly  matInput type="date" formControlName="datenterEl"  value="{{datenterEleve}}"
+                                            placeholder="تاريخ   الدخول">
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>calendar_today</mat-icon>
+                                        <input  readonly  matInput type="time" 
+                                            placeholder="   وقت الدخول" formControlName="timeEnterEl">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+
+
+
+
+                            </div>
+
+                            <div>
+                                <button mat-raised-button matStepperPrevious color="accent">
+                                    <mat-icon>skip_next</mat-icon>رجوع
+                                </button>
+                                <button mat-raised-button matStepperNext color="primary">التالى<mat-icon>skip_previous
+                                    </mat-icon></button>
+
+
+                            </div>
+
+                        </mat-step>
+
+                        <mat-step [stepControl]="addForm">
+
+                            <ng-template matStepLabel>العنوان</ng-template>
+                            <h3 class="first">العنوان</h3>
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12 ui-md-2">
+                                    <mat-icon matSuffix> place</mat-icon>
+                                    <p-dropdown (onChange)="onChangeGouvernorat($event)" [options]="gouvernorat"
+                                        placeholder="الولاية" formControlName="gouvernorat" [filter]="true"
+                                        id="gouvernorat" name="gouvernorat"></p-dropdown>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-1">
+
+                                </div>
+                                <div class="ui-g-12 ui-md-2">
+                                    <mat-icon matSuffix> pin_drop</mat-icon>
+                                    <p-dropdown [options]="delegation" placeholder="العتمدية"
+                                        formControlName="delegation" [filter]="true" id="delegation" name="delegation">
+                                    </p-dropdown>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-1">
+
+                                </div>
+
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix> person_pin_circle</mat-icon>
+                                        <input matInput formControlName="rueEl" placeholder="إسم الشارع " required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix> local_parking</mat-icon>
+                                        <input type="number" matInput formControlName="codePostaleEl"
+                                            placeholder="الرقم البريدي" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12 ui-md-3">
+
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <textarea matInput formControlName="zonePoliceEl"
+                                            placeholder=" امنطقة الأمن أو الحرس الراجع لها بالنظر (*)"
+                                            required></textarea>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <textarea matInput formControlName="centralPoliceEl"
+                                            placeholder=" مركز الأمن أو الحرس الراجع لها بالنظر (*)"
+                                            required></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div>
+                                <br>
+
+                            </div>
+                            <div>
+                                <button mat-raised-button matStepperPrevious color="accent">
+                                    <mat-icon>skip_next</mat-icon>رجوع
+                                </button>
+                                <button mat-raised-button matStepperNext color="primary">التالى<mat-icon>
+                                        skip_previous
+                                    </mat-icon></button>
+
+
+                            </div>
+
+                        </mat-step>
+
+                        <mat-step [stepControl]="addForm">
+
+                            <ng-template matStepLabel>المؤهلات الأكادمية
+                            </ng-template>
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12 ui-md-2">
+                                    <mat-icon matSuffix>how_to_vote</mat-icon>
+                                    <p-dropdown [options]="nivScolaireEl" placeholder="المستوى التعليمي"
+                                        formControlName="nivScolaireEl" [filter]="true" id="nivScolaireEl"
+                                        name="nivScolaireEl">
+                                    </p-dropdown>
+
+                                </div>
+                                <div class="ui-g-12 ui-md-2">
+
+                                </div>
+                                <div class="ui-g-12 ui-md-2">
+                                    <mat-icon matSuffix>how_to_vote</mat-icon>
+                                    <p-dropdown [options]="specialites" placeholder=" الإختصاص"
+                                        formControlName="specialite" [filter]="true" id="specialite"
+                                        name="specialite">
+                                    </p-dropdown>
+
+                                </div>
+                                <div class="ui-g-12 ui-md-2">
+
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>file_copy</mat-icon>
+                                        <textarea matInput formControlName="diplomeEl"
+                                            placeholder="الشهائد العلمية المتحصل عليها " required></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>flag</mat-icon>
+                                        <textarea matInput formControlName="stagesEl"
+                                            placeholder="التربصات التي تمت المشاركة فيها " required></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <button mat-raised-button matStepperPrevious color="accent">
+                                    <mat-icon>skip_next</mat-icon>رجوع
+                                </button>
+                                <button mat-raised-button matStepperNext color="primary">التالى<mat-icon>skip_previous
+                                    </mat-icon></button>
+
+
+                            </div>
+
+                        </mat-step>
+                        <mat-step [stepControl]="addForm">
+
+                            <ng-template matStepLabel>الأنشطة</ng-template>
+
+                            <div class="ui-g ui-fluid">
+
+                                <div class="ui-g-12 ui-md-5">
+
+                                </div>
+                                <div class="ui-g-12 ui-md-5">
+
+
+                                    <mat-radio-group (change)="radioChange($event)" formControlName="etatMilitaireEl"
+                                        aria-label="الخدمة العسكرية">
+                                        الخدمة العسكرية
+                                        <mat-radio-button value="نعم">نعم</mat-radio-button>
+                                        <mat-radio-button value="لا">لا</mat-radio-button>
+                                    </mat-radio-group>
+
+                                </div>
+
+                            </div>
+                            <div class="ui-g ui-fluid">
+
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>thumbs_up_down</mat-icon>
+                                        <textarea matInput formControlName="passionEl"
+                                            placeholder=" الهواية"></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>toll</mat-icon>
+                                        <textarea matInput formControlName="activiteSportifEl"
+                                            placeholder="الأنشطة الرياضية"></textarea>
+                                    </mat-form-field>
+                                </div>
+
+
+
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>verified_user</mat-icon>
+                                        <textarea matInput formControlName="associationEl"
+                                            placeholder=" الجمعيات"></textarea>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+
+                            <div>
+                                <br>
+                                <br>
+                                <br>
+
+
+
+                            </div>
+                            <div>
+                                <button mat-raised-button matStepperPrevious color="accent">
+                                    <mat-icon>skip_next</mat-icon>رجوع
+                                </button>
+                                <button mat-raised-button matStepperNext color="primary">التالى<mat-icon>skip_previous
+                                    </mat-icon></button>
+
+
+                            </div>
+
+                        </mat-step>
+                        <mat-step [stepControl]="addForm">
+
+                            <ng-template matStepLabel>العائلة</ng-template>
+
+                            <div class="ui-g ui-fluid">
+
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>record_voice_over</mat-icon>
+                                        <textarea matInput formControlName="identitePereEl"
+                                            placeholder="هوية الأب"></textarea>
+                                    </mat-form-field>
+                                </div>
+
+
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>pregnant_woman</mat-icon>
+                                        <textarea matInput formControlName="identiteMereEl"
+                                            placeholder="هوية الأم"></textarea>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+
+                                        <mat-icon matSuffix>rowing</mat-icon>
+                                        <textarea matInput formControlName="fonctionPereEl"
+                                            placeholder="مهنة الأب"></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                    <mat-form-field>
+                                        <mat-icon matSuffix>store</mat-icon>
+                                        <textarea matInput formControlName="societePereEl"
+                                            placeholder="   مكان عمل الأب"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+
+
+
+                            </div>
+                            <div>
+                                <button mat-raised-button matStepperPrevious color="accent">
+                                    <mat-icon>skip_next</mat-icon>رجوع
+                                </button>
+                                <button mat-raised-button matStepperNext color="primary">التالى<mat-icon>skip_previous
+                                    </mat-icon></button>
+
+
+                            </div>
+
+                        </mat-step>
+                        <mat-step [stepControl]="addForm">
+
+                            <ng-template matStepLabel>التصنيف</ng-template>
+                            <h3 class="first">التصنيف</h3>
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12 ui-md-2">
+                                    <mat-icon matSuffix> place</mat-icon>
+                                    <p-dropdown (onChange)="onChangeSession($event)" [options]="session"
+                                        placeholder="الدور" formControlName="session" [filter]="true" id="session"
+                                        name="session"></p-dropdown>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-1">
+
+                                </div>
+                                <div class="ui-g-12 ui-md-2">
+                                    <mat-icon matSuffix> place</mat-icon>
+                                    <p-dropdown (onChange)="onChangeGroup($event)" [options]="group" placeholder="الفوج"
+                                        formControlName="group" [filter]="true" id="group" name="group"></p-dropdown>
+                                </div>
+                                <div class="ui-g-12 ui-md-1">
+
+                                </div>
+                                <div class="ui-g-12 ui-md-2">
+                                    <mat-icon matSuffix> place</mat-icon>
+                                    <p-dropdown (onChange)="onChangeCompany($event)" [options]="company"
+                                        placeholder="السرية" formControlName="company" [filter]="true" id="company"
+                                        name="company"></p-dropdown>
+                                </div>
+                                <div class="ui-g-12 ui-md-1">
+
+                                </div>
+                                <div class="ui-g-12 ui-md-2">
+                                    <mat-icon matSuffix> place</mat-icon>
+                                    <p-dropdown [options]="section" placeholder="الفصيل" formControlName="section"
+                                        [filter]="true" id="section" name="section"></p-dropdown>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                            <div>
+                                <button mat-raised-button matStepperPrevious color="accent">
+                                    <mat-icon>skip_next</mat-icon>رجوع
+                                </button>
+                                <button mat-raised-button matStepperNext color="primary">التالى<mat-icon>
+                                        skip_previous
+                                    </mat-icon></button>
+
+
+                            </div>
+
+                        </mat-step>
+                        <mat-step>
+                            <ng-template matStepLabel>تسجيل</ng-template>
+                            <div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+
+                            </div>
+
+                            <h4>
+
+                                هل تريد حفظ هذه البيانات ? <mat-icon>sentiment_very_satisfied</mat-icon>
+                            </h4>
+                            <div>
+                                <br>
+                                <br>
+
+
+                            </div>
+                            <div>
+
+                                <button mat-raised-button matStepperPrevious color="accent">
+                                    <mat-icon>skip_next</mat-icon>رجوع
+                                </button>
+                                <button mat-raised-button (click)="stepper.reset()" color="warn">إعادة ضبط البيانات
+                                    <mat-icon>redo</mat-icon></button>
+                                <button mat-raised-button (click)="onSubmit(addForm.value)" color="primary">تسجيل
+                                    <mat-icon>save_alt
+                                    </mat-icon></button>
+                            </div>
+                        </mat-step>
+                    </mat-horizontal-stepper>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

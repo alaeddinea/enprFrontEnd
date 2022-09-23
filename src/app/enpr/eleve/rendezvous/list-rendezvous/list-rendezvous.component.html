@@ -1,0 +1,116 @@
+<p-card *ngIf="tabclickedMedicale">
+    <p-toast position="ui-toast-center"></p-toast>
+  
+    <div class="ui-g ui-fluid">
+  
+      <div class="ui-g-8 ui-md-8">
+        <div class="animated zoomIn">
+          <p-table id="ourTbale" [value]="entities" #dt selectionMode="single" [paginator]="true"
+            [rowsPerPageOptions]="[5,10,20]" [rows]="5" [globalFilterFields]="['typeConsultation','dateConsultation','remarqueConsultation']">
+            <ng-template pTemplate="caption">
+              <h2 class="text-center">   المواعيد خلال التكوين
+              </h2>
+  
+              <div style="text-align: right">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="محرك البحث "
+                  (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="typeRendezvous">   نوع الموعد
+                  <p-sortIcon field="typeRendezvous" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order">
+  
+  
+                  </p-sortIcon>
+  
+                </th>
+                <th pSortableColumn="dateRendezvous"> التاريخ
+                  <p-sortIcon field="dateRendezvous" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order">
+  
+  
+                  </p-sortIcon>
+  
+                </th>
+               
+                <th pSortableColumn="remarqueRendezvous"> الملاحظات
+                  <p-sortIcon field="remarqueRendezvous" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order">
+  
+  
+                  </p-sortIcon>
+  
+                </th>
+  
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+              <tr>
+                <td>{{row.typeRendezvous}}</td>
+                <td>{{row.dateRendezvous| date: 'dd/MM/yyyy  hh:mm a'}}</td>
+                <!--<td>{{row.timeRendezvous}}</td>-->
+                <td>{{row.remarqueRendezvous}}</td>
+                <td>
+                  <button class="btn btn-danger" [disabled]="currentUserRole!='ROLE_SANTE'  && currentUserRole!='ROLE_ADMIN'"    (click)="delete(row)"> <i class="icon-trash"></i></button>
+  
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+      <div class="ui-g-4 ui-md-4">
+        <div class="animated zoomIn">
+          <div class="card card-accent-primary">
+            <div class="card-header">
+              <h2 class="text-center"> إدراج   موعد</h2>
+            </div>
+            <div class="card-body">
+  
+              <div class="col-md-6 user-container">
+  
+  
+                <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm.value)">
+  
+                  <div class="form-group">
+                    <label for="medicale"> نوع  الموعد:</label>
+  
+                    <p-dropdown [options]="typeRendezvous" formControlName="typeRendezvous" placeholder=" إختيارالعيادة الطبية"></p-dropdown>
+                  </div>
+  
+                  <div class="form-group">
+                    <label for="dateRendezvous"> التاريخ:</label>
+                    <input type="datetime-local" formControlName="dateRendezvous" name="dateRendezvous" class="form-control"
+                      id="dateRendezvous">
+                  </div>
+                  
+                <!-- <div class="form-group">
+                    <label for="timeRendezvous"> الساعة:</label>
+                    <input type="time" formControlName="timeRendezvous" name="timeRendezvous" class="form-control"
+                      id="timeRendezvous">
+                  </div>-->
+                  <div class="form-group">
+                    <label for="remarqueRendezvous"> الملاحضات:</label>
+                    <input type="text" formControlName="remarqueRendezvous" name="remarqueRendezvous" class="form-control"
+                      id="remarqueRendezvous">
+                  </div>
+  
+                  <button  [disabled]="currentUserRole!='ROLE_SANTE'  && currentUserRole!='ROLE_ADMIN'"    class="btn btn-success"><i class="icon-plus"></i></button>
+                </form>
+              </div>
+  
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </p-card>
+  

@@ -1,0 +1,223 @@
+
+<p-dialog [(visible)]="displayConfirmeAccepted" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}"
+  [minY]="70" [baseZIndex]="10000">
+  <p-header>
+    <span class="ui-panel-title" style="font-size:18px;display:inline-block;margin-top:2px"> إعلام 
+    </span>
+  </p-header>
+
+  <div class="form-group">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+      <div class="ui-grid-row">
+        <label>  تم عملية القبول بنجاح </label>
+      </div>
+      <div class="ui-grid-row">
+        <button pButton style="width: 150px; background-color: #fbb03b;" type="button"  (click)="acceptFinal()" pButton type="button"
+         label="موافق"></button>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+  </p-footer>
+</p-dialog>
+<p-dialog [(visible)]="displayConfirme" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}"
+  [minY]="70" [baseZIndex]="10000">
+  <p-header>
+    <span class="ui-panel-title" style="font-size:18px;display:inline-block;margin-top:2px"> تنبيه 
+    </span>
+  </p-header>
+
+  <div class="form-group">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+      <div class="ui-grid-row">
+        <label> ?هل أنت متأكد </label>
+      </div>
+      <div class="ui-grid-row">
+        <button pButton type="button" class="ui-button-success" (click)="yesAcceptToListSelect()" pButton type="button"
+          icon="pi pi-plus" label="نعم"></button>
+
+        <button (click)="nonAccepted()" pButton type="button" label="لا" icon="pi pi-times"
+          class="ui-button-danger"></button>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+  </p-footer>
+</p-dialog>
+<div class="container animated zoomIn">
+  <div class="card card-accent-primary">
+    <div class="card-header">
+      <h2 class="text-center"> تأكيد الدخول</h2>
+      <h4 class="text-center"  *ngIf='!validateDate' style="color: brown;">تاريخ الإستدعاء لا يوافق التاريخ الحالي</h4>
+    </div>
+    <div class="card-body">
+
+      <div class="col-md-12 user-container">
+
+
+        <form [formGroup]="addForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="numdossier"> رقم الملف:</label>
+
+                <input readonly formControlName="numdossier" name="numdossier" class="form-control"
+                  value="شيسبامشيسابمشيس" id="numdossier">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="numcin"> ر.ب.ت.و:</label>
+
+                <input readonly formControlName="numcin" name="numcin" class="form-control" id="numcin">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="prenom"> الإسم:</label>
+
+                <input readonly formControlName="prenom" name="prenom" class="form-control" id="prenom">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nom"> اللقب:</label>
+
+                <input readonly formControlName="nom" name="nom" class="form-control" id="nom">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label for="prenomgp1"> إسم الأب:</label>
+
+                <input readonly formControlName="prenompere" name="prenompere" class="form-control" id="prenompere">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="prenomgp1"> إسم الجد:</label>
+
+                <input readonly formControlName="prenomgp1" name="prenomgp1" class="form-control" id="prenomgp1">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="prenomdemere"> إسم الأم:</label>
+
+                <input readonly formControlName="prenomdemere" name="prenomdemere" class="form-control"
+                  id="prenomdemere">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nomdemere"> لقبها:</label>
+
+                <input readonly formControlName="nomdemere" name="nomdemere" class="form-control" id="nomdemere">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="datenaissance"> تاريخ الولادة:</label>
+                <p >  {{dateNai | date:'dd/MM/yyyy'}}</p>
+               <!-- <input readonly formControlName="datenaissance" name="datenaissance" class="form-control"
+                  id="datenaissance">-->
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="lib_lieu_naissance"> مكان الولادة:</label>
+
+                <input readonly formControlName="lib_lieu_naissance" name="lib_lieu_naissance" class="form-control"
+                  id="lib_lieu_naissance">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label for="adresse"> العنوان:</label>
+
+                <input readonly formControlName="adresse" name="adresse" class="form-control" id="adresse">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="telephone"> الهاتف:</label>
+
+                <input readonly formControlName="telephone" name="adresse" class="form-control" id="telephone">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="cod_sexe"> الجنس:</label>
+                <input readonly type="text" *ngIf="genre==0" value="ذكر" name="cod_sexe" class="form-control"
+                  id="cod_sexe">
+                <input readonly type="text" *ngIf="genre==1" value="أنثى" name="cod_sexe" class="form-control"
+                  id="cod_sexe">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dateconv"> تاريخ الإستدعاء:</label>
+                <p style="color:blueviolet;" >   {{dateConvocation | date:'dd/MM/yyyy'}}</p>
+               <!--<input readonly formControlName="dateconv" name="dateconv" class="form-control" id="dateconv">-->
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dateEntre"> تاريخ الدخول:</label>
+                
+               <p style="color: brown;"> {{todayDate | date:'dd/MM/yyyy'}}</p>
+             <!--  {{todayDate | date:'shortDate'}} <input formControlName="dateEntre" type="date" name="dateEntre" class="form-control" id="dateEntre">-->
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="heureEntre"> وقت الدخول:</label>
+                <p style="color: brown;"> {{todayDate | date:'hh:mm'}}</p>
+                <!--<input formControlName="heureEntre" type="time" name="heureEntre" class="form-control" id="heureEntre">-->
+              </div>
+            </div>
+
+          </div>
+          <div  class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-danger" (click)="retourPageOfficiel()" ><i class="fa fa-sign-out"></i> إلغاء </button>
+
+              <button [disabled]="!validateDate"  type="button" (click)="confirmAccpter()" pButton
+                icon="pi pi-check" label="تأكيد القبول"></button>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

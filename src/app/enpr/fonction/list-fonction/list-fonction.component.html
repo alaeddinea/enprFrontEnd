@@ -1,0 +1,39 @@
+<p-toast position="ui-toast-center"></p-toast>
+<div class="animated zoomIn">
+  <p-table [value]="entities" #dt selectionMode="single" [paginator]="true" [rows]="10"
+    [globalFilterFields]="['code_fonction','libelle_fonction']">
+    <ng-template pTemplate="caption">
+      <h2 class="text-center">قائمة المهام </h2>
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter"
+          (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+
+
+
+        <th [pSortableColumn]="libelle_fonction">المهمة
+          <p-sortIcon [field]="libelle_fonction" ariaLabel="Activate to sort"
+            ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+          </p-sortIcon>
+
+        </th>
+        <th><button class="btn btn-primary" style="width:50px" (click)="addFonction()"> <i class="icon-plus"></i>
+          </button></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td>{{row.libelle_fonction}}</td>
+        <td>
+          <button class="btn btn-danger" (click)="delete(row)"> <i class="icon-trash"></i></button>
+          <button class="btn btn-success" (click)="edit(row)" style="margin-left: 20px;"> <i
+              class="icon-pencil"></i></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

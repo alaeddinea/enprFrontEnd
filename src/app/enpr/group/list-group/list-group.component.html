@@ -1,0 +1,101 @@
+<p-toast position="ui-toast-center"></p-toast>
+<div class="animated zoomIn">
+
+    <p-table id="ourTbale" [value]="entities" selectionMode="single" [rowsPerPageOptions]="[5,10,20]" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="caption">
+            <h2 class="text-center">قائمة الأفواج </h2>
+            <div style="text-align: left">
+                <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL"
+                    (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+                <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()"
+                    class="ui-button-warning"></button>
+
+            </div>
+            <div style="text-align: right">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="محرك البحث " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th [pSortableColumn]="code_conge">رقم الدورة
+                    <p-sortIcon [field]="code_conge" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+                <th [pSortableColumn]="libelle_conge">إسم الفوج
+                    <p-sortIcon [field]="libelle_conge" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+
+                </th>
+                <th [pSortableColumn]="libelle_conge">آمر الفوج
+                    <p-sortIcon [field]="libelle_conge" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+
+                </th>
+                <th><button [disabled]="currentUserRole!='ROLE_MANIPULATION'  && currentUserRole!='ROLE_ADMIN'"    class="btn btn-primary" style="width:50px" (click)="addConge()"> <i class="icon-plus"></i>
+                    </button></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+            <tr>
+                <td>{{row.session.numSession}}</td>
+                <td>{{row.nomGroup}}</td>
+                <td>{{row.commandGroup}}</td>
+
+                <td>
+                  <button  type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL"
+                  (click)="getAllEleveByGroup(row)" style="margin-right: 0.5em;" class="ui-button-success"></button>
+
+                  <output *ngIf="dataToExcel" type="output" class="k-button" (click)="excelexport.save()" id="mybutton"></output>
+                  <kendo-excelexport  [data]="dataToExcel"  [fileName]="fileName" #excelexport>
+                    <kendo-excelexport-column field="numDossierRecrueEl" title="رقم ملف الإنتداب" [hidden]="false">
+                    </kendo-excelexport-column>
+                      <kendo-excelexport-column field="cinEl" title="ر.ب.ت.و">
+                      </kendo-excelexport-column>
+                      <kendo-excelexport-column field="grade.libelle_grade" title="الرتبة">
+                    </kendo-excelexport-column>
+                      <kendo-excelexport-column field="prenomEl" title="الإسم" [hidden]="false">
+                      </kendo-excelexport-column>
+                      <kendo-excelexport-column field="identitePereEl" title="هوية الأب">
+                    </kendo-excelexport-column>
+                      <kendo-excelexport-column field="nomEl" title="اللقب">
+                      </kendo-excelexport-column>
+                      <kendo-excelexport-column field="etatcivil.libelle_etatcivil" title="الحالة المدنية">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="group.nomGroup" title="الفوج">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="company.numCompany" title="السرية">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="section.numSection" title="الفصيل">
+                    </kendo-excelexport-column>
+                      <kendo-excelexport-column field="gouvernorat.libelle_gouvernorat" title="الولاية" [hidden]="false">
+                      </kendo-excelexport-column>
+                      <kendo-excelexport-column field="telEl" title="الهاتف">
+                    </kendo-excelexport-column>
+                      
+                    <kendo-excelexport-column field="specialite.libelle_specialite" title="الإختصاص">
+                    </kendo-excelexport-column>
+                </kendo-excelexport>
+                <p-radioButton name="selectedSex" [(ngModel)]="selectedSex"  value="0" label="ذكور" ></p-radioButton>
+                <p-radioButton name="selectedSex" [(ngModel)]="selectedSex" value="1"  label="إناث" ></p-radioButton>
+
+                </td>
+               
+                <td>
+                  <button [disabled]="currentUserRole!='ROLE_MANIPULATION'  && currentUserRole!='ROLE_ADMIN'"    class="btn btn-danger" (click)="delete(row)"> <i class="icon-trash"></i></button>
+                  <button  [disabled]="currentUserRole!='ROLE_MANIPULATION'  && currentUserRole!='ROLE_ADMIN'"    class="btn btn-success" (click)="edit(row)" style="margin-left: 20px;"> <i
+                          class="icon-pencil"></i></button>
+              </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

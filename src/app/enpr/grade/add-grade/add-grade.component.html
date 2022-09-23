@@ -1,0 +1,35 @@
+
+<div class="animated zoomIn" >
+    <div class="card card-accent-primary">
+            <div class="card-header">
+                <h2 class="text-center">ادراج</h2>
+            </div>
+     <div class="card-body">
+    
+        <div class="col-md-6 user-container">
+    
+            
+            <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+           
+              <div class="form-group">
+                <label for="libellegrade">الرتبة:</label>
+                <input formControlName="libelle_grade" name="libelle_grade" class="form-control" id="libellegrade">
+              </div>
+
+
+              <div class="form-group">
+                <label for="libellegrade">الهيأة:</label>
+                <p-dropdown [options]="categorieGrade"  formControlName="categorieGrade" ></p-dropdown> 
+            </div>
+
+              <button [disabled]="!addForm.valid" class="btn btn-success" ><i class="icon-plus"></i></button>
+    
+            </form>
+        </div>
+    
+    </div>
+    
+    </div>
+    
+    </div>
+

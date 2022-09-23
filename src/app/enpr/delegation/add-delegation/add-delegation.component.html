@@ -1,0 +1,34 @@
+
+<div class="animated zoomIn" >
+    <div class="card card-accent-primary">
+            <div class="card-header">
+                <h2 class="text-center"> إدراج معتمدية لولاية {{gouvernorat.libelle_gouvernorat}}  </h2>
+            </div>
+     <div class="card-body">
+    
+        <div class="col-md-6 user-container">
+    
+            <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+            <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm.value)">
+            
+              
+            
+                
+                <input formControlName="gouvernorat"  name="gouvernorat" class="form-control" id="gouvernorat" hidden>
+            
+              <div class="form-group">
+                <label for="libelle_delegation">التسميـــــة:</label>
+                <input formControlName="libelle_delegation"  name="libelle_delegation" class="form-control" id="libelle_delegation">
+              </div>
+              
+              <p-button type="ngSubmit" icon="pi pi-plus" label="نسجيل"></p-button>
+    
+            </form>
+        </div>
+    
+    </div>
+    
+    </div>
+    
+    </div>

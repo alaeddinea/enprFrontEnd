@@ -1,0 +1,46 @@
+
+<div class="animated zoomIn">
+  <div class="card card-accent-primary">
+    <div class="card-header">
+      <h2 class="text-center"> إدراج موظف</h2>
+    </div>
+    <div class="card-body">
+
+      <div class="col-md-6 user-container">
+
+
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label for="matricule"> الرقم الإداري:</label>
+            <input type="number" formControlName="matricule" name="matricule" class="form-control" id="matricule">
+          </div>
+          <div class="form-group">
+            <label for="cnrps"> المعرف الوحيد:</label>
+            <input type="number" formControlName="cnrps" name="cnrps" class="form-control" id="cnrps">
+          </div>
+          <div class="form-group">
+            <label for="prenom"> الإسم:</label>
+            <input formControlName="prenom" name="prenom" class="form-control" id="prenom">
+          </div>
+          <div class="form-group">
+            <label for="nom"> اللقب:</label>
+            <input formControlName="nom" name="nom" class="form-control" id="nom">
+          </div>
+          <div class="form-group">
+            <label for="nom_pere">إسم الأب:</label>
+            <input formControlName="nom_pere" name="nom_pere" class="form-control" id="nom_pere">
+          </div>
+          <div class="form-group">
+            <label for="date_retraite"> تاريخ التقاعد:</label>
+            <input type="date" formControlName="date_retraite" name="date_retraite" class="form-control" id="date_retraite">
+          </div>
+          <button [disabled]="clicked"   class="btn btn-success"><i class="icon-plus"></i></button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

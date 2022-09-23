@@ -1,0 +1,441 @@
+
+    <div  id="entityPrint" >
+        <div class="card-header">
+            <h3 class="text-center">  الهوية الشخصية للتلميذ{{nometprenom}} </h3>
+        </div>
+        <div >
+            <div class="col-md-12 user-container">
+
+                <form [formGroup]="addForm">
+                    <div>
+                        <label title="الهوية"></label>
+                    </div>
+                    <div class="ui-g ui-fluid">
+
+                        <div >
+                         
+                            <mat-form-field>
+                                <input matInput type="number" formControlName="cinEl"
+                                placeholder="ر.ب.ت.و" required
+                             >
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>calendar_today</mat-icon>
+                                <input matInput type="date" formControlName="dateCinEl"
+                                    placeholder="تاريخ إصدار   بطاقة التعريف الوطنية" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="ui-g ui-fluid">
+
+                        <div>
+                            <mat-form-field>
+                                <mat-icon matSuffix>how_to_reg</mat-icon>
+                                <input matInput formControlName="prenomEl" placeholder=" الإسم" required>
+
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>how_to_reg</mat-icon>
+                                <input matInput formControlName="nomEl" placeholder="اللقب " required>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>calendar_today</mat-icon>
+                                <input matInput formControlName="datenaissanceEl" type="date"
+                                    placeholder="تاريخ الولادة" required>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix> pin_drop</mat-icon>
+                                <input matInput formControlName="lieuNaissanceEl" placeholder=" مكان الولادة" required>
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+                    <div class="ui-g ui-fluid">
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix> email</mat-icon>
+                                <input matInput formControlName="mailEl" type="email" placeholder=" البريد الإلكتروني"
+                                    required>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+
+                                <mat-icon matSuffix>perm_phone_msg</mat-icon>
+
+                                <input matInput formControlName="telFamilleEl" type="tel"
+                                    placeholder="رقم الهاتف العائلي " required>
+
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>settings_phone</mat-icon>
+                                <input matInput formControlName="fixeFamilleEl" type="tel"
+                                    placeholder="رقم الهاتف العائلي القار " required>
+
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix> contact_phone</mat-icon>
+                                <input matInput formControlName="telEl" type="tel" placeholder="رقم الهاتف الشخصي "
+                                    required>
+
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+
+         
+                    <h6>الإنتداب</h6>
+
+                    <div>
+                        <mat-form-field>
+                            <mat-icon matSuffix>folder_shared</mat-icon>
+                            <input matInput formControlName="numDossierRecrueEl" type="number"
+                                placeholder="رقم ملف الإنتداب" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-radio-group  formControlName="categorie" aria-label="الهيأة">
+                            <mat-radio-button value="مدني">مدني</mat-radio-button>
+                            <mat-radio-button value="نظامي">نظامي</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <p-dropdown [options]="grade" placeholder=" إختيار الرتية الإنتداب" formControlName="grade"
+                            [filter]="true" id="grade" name="grade"></p-dropdown>
+                    </div>
+
+                    <div>
+                        
+                        
+                        
+                        
+                        
+
+
+
+
+                    </div>
+
+                    <div>
+                        
+                        
+
+
+                    </div>
+
+
+
+
+
+                    <h6>العنوان</h6>
+                    
+                    <div class="ui-g ui-fluid">
+                        <div class=" ui-md-2">
+                            <mat-icon matSuffix> place</mat-icon>
+                            <p-dropdown  [options]="gouvernorat"
+                                placeholder="الولاية" formControlName="gouvernorat" [filter]="true" id="gouvernorat"
+                                name="gouvernorat"></p-dropdown>
+                        </div>
+
+                        <div class=" ui-md-1">
+
+                        </div>
+                        <div class=" ui-md-2">
+                            <mat-icon matSuffix> pin_drop</mat-icon>
+                            <p-dropdown [options]="delegation" placeholder="العتمدية" formControlName="delegation"
+                                [filter]="true" id="delegation" name="delegation">
+                            </p-dropdown>
+                        </div>
+
+                        <div class=" ui-md-1">
+
+                        </div>
+
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix> person_pin_circle</mat-icon>
+                                <input matInput formControlName="rueEl" placeholder="إسم الشارع " required>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix> local_parking</mat-icon>
+                                <input type="number" matInput formControlName="codePostaleEl"
+                                    placeholder="الرقم البريدي" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="ui-g ui-fluid">
+                        <div >
+
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <textarea matInput formControlName="zonePoliceEl"
+                                    placeholder=" امنطقة الأمن أو الحرس الراجع لها بالنظر (*)" required></textarea>
+                            </mat-form-field>
+                        </div>
+
+                        <div >
+                            <mat-form-field>
+                                <textarea matInput formControlName="centralPoliceEl"
+                                    placeholder=" مركز الأمن أو الحرس الراجع لها بالنظر (*)" required></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div>
+                        
+
+                    </div>
+                    <div>
+                        
+                        
+
+
+                    </div>
+
+
+
+
+
+                    <h6>المؤهلات الأكادمية
+                    </h6>
+                    <div class="ui-g ui-fluid">
+                        <div class=" ui-md-2">
+                            <mat-icon matSuffix>how_to_vote</mat-icon>
+                            <p-dropdown [options]="nivScolaireEl" placeholder="المستوى التعليمي"
+                                formControlName="nivScolaireEl" [filter]="true" id="nivScolaireEl" name="nivScolaireEl">
+                            </p-dropdown>
+
+                        </div>
+                        <div class=" ui-md-2">
+
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>file_copy</mat-icon>
+                                <textarea matInput formControlName="diplomeEl"
+                                    placeholder="الشهائد العلمية المتحصل عليها " required></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>flag</mat-icon>
+                                <textarea matInput formControlName="stagesEl"
+                                    placeholder="التربصات التي تمت المشاركة فيها " required></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        </div>
+                    </div>
+
+
+                    <div>
+                        
+                        
+
+
+                    </div>
+
+
+
+
+                    <h6>الأنشطة</h6>
+
+                    <div class="ui-g ui-fluid">
+
+                        <div class=" ui-md-5">
+
+                        </div>
+                        <div class=" ui-md-5">
+
+
+                            <mat-radio-group  formControlName="etatMilitaireEl"
+                                aria-label="الخدمة العسكرية">
+                                الخدمة العسكرية
+                                <mat-radio-button value="نعم">نعم</mat-radio-button>
+                                <mat-radio-button value="لا">لا</mat-radio-button>
+                            </mat-radio-group>
+
+                        </div>
+                    </div>
+                    <div class="ui-g ui-fluid">
+
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>thumbs_up_down</mat-icon>
+                                <textarea matInput formControlName="passionEl" placeholder=" الهواية"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>toll</mat-icon>
+                                <textarea matInput formControlName="activiteSportifEl"
+                                    placeholder="الأنشطة الرياضية"></textarea>
+                            </mat-form-field>
+                        </div>
+
+
+
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>verified_user</mat-icon>
+                                <textarea matInput formControlName="associationEl" placeholder=" الجمعيات"></textarea>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+
+                    <div>
+                        
+                        
+                        
+
+
+
+                    </div>
+                    <div>
+                        
+                        
+
+
+                    </div>
+
+
+
+
+                    <h6>العائلة</h6>
+
+                    <div class="ui-g ui-fluid">
+
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>record_voice_over</mat-icon>
+                                <textarea matInput formControlName="identitePereEl" placeholder="هوية الأب"></textarea>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>pregnant_woman</mat-icon>
+                                <textarea matInput formControlName="identiteMereEl" placeholder="هوية الأم"></textarea>
+                            </mat-form-field>
+                        </div>
+
+                        <div >
+                            <mat-form-field>
+
+                                <mat-icon matSuffix>rowing</mat-icon>
+                                <textarea matInput formControlName="fonctionPereEl" placeholder="مهنة الأب"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field>
+                                <mat-icon matSuffix>store</mat-icon>
+                                <textarea matInput formControlName="societePereEl"
+                                    placeholder="   مكان عمل الأب"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        
+                        
+                        
+                        
+
+
+
+                    </div>
+                    <div>
+                        
+                        
+
+
+                    </div>
+
+
+
+
+                    <h6>التصنيف</h6>
+                    
+                    <div class="ui-g ui-fluid">
+                        <div class=" ui-md-2">
+                            <mat-icon matSuffix> place</mat-icon>
+                            <p-dropdown  [options]="session" placeholder="الدور"
+                                formControlName="session" [filter]="true" id="session" name="session"></p-dropdown>
+                        </div>
+
+                        <div class=" ui-md-1">
+
+                        </div>
+                        <div class=" ui-md-2">
+                            <mat-icon matSuffix> place</mat-icon>
+                            <p-dropdown  [options]="group" placeholder="الفوج"
+                                formControlName="group" [filter]="true" id="group" name="group"></p-dropdown>
+                        </div>
+                        <div class=" ui-md-1">
+
+                        </div>
+                        <div class=" ui-md-2">
+                            <mat-icon matSuffix> place</mat-icon>
+                            <p-dropdown [options]="company" placeholder="السرية"
+                                formControlName="company" [filter]="true" id="company" name="company"></p-dropdown>
+                        </div>
+                        <div class=" ui-md-1">
+
+                        </div>
+                        <div class=" ui-md-2">
+                            <mat-icon matSuffix> place</mat-icon>
+                            <p-dropdown [options]="section" placeholder="الفصيل" formControlName="section"
+                                [filter]="true" id="section" name="section"></p-dropdown>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        
+                        
+                        
+                        
+                        
+                    </div>
+            
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>

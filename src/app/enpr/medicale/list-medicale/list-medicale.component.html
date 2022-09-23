@@ -1,0 +1,105 @@
+<p-toast position="ui-toast-center"></p-toast>
+<div class="animated zoomIn">
+    <p-table id="ourTbale" [value]="entities" #dt selectionMode="single" [paginator]="true"
+        [rowsPerPageOptions]="[5,10,20]" [rows]="10" [globalFilterFields]="['categorieGrade','libelle_grade']">
+        <ng-template pTemplate="caption">
+            <h2 class="text-center">قائمة الراحات الطبية </h2>
+            <div style="text-align: left">
+                
+                <p>
+                    التـــاريخ
+
+
+                    <input  [(ngModel)]='dateDebut'  type="date">
+
+                    <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="  قائــمة الإعــفاءات "
+                    (click)="listRepo()" style="margin-right: 0.5em;"
+                    class="ui-button-success"></button>
+                </p>
+              
+
+            <output *ngIf="dataToExcel" type="output" class="k-button" (click)="excelexport.save()"
+                id="mybutton"></output>
+
+            <kendo-excelexport [data]="dataToExcel" [fileName]="fileName" #excelexport>
+                <kendo-excelexport-column field="num" title=" ع/ر " [hidden]="false">
+                </kendo-excelexport-column>
+                <kendo-excelexport-column field="numDossierRecrueEl" title="رقم ملف الإنتداب" [hidden]="false">
+                </kendo-excelexport-column>
+                <kendo-excelexport-column field="cinEl" title="ر.ب.ت.و">
+                </kendo-excelexport-column>
+
+                <kendo-excelexport-column field="prenomEl" title="الإسم" [hidden]="false">
+                </kendo-excelexport-column>
+                
+                <kendo-excelexport-column field="identitePereEl" title="إسم الأب">
+                </kendo-excelexport-column>
+                
+               
+                <kendo-excelexport-column field="nomEl" title="اللقب">
+                </kendo-excelexport-column>
+                <kendo-excelexport-column field="grade" title="الرتبة">
+                </kendo-excelexport-column>
+                <kendo-excelexport-column field="session" title="الدورة">
+                </kendo-excelexport-column>
+                <kendo-excelexport-column field="nomGroup" title="الفوج" [hidden]="false">
+                </kendo-excelexport-column>
+                <kendo-excelexport-column field="numCompany" title="السرية" [hidden]="false">
+                </kendo-excelexport-column>
+                
+               <kendo-excelexport-column field="numSection" title="الفصيل">
+                </kendo-excelexport-column>
+                <kendo-excelexport-column field="nomMedicale" title="إسم الراحة الطبية">
+                </kendo-excelexport-column>
+                <kendo-excelexport-column field="dateDebutRepo" title="مــــن" [hidden]="false">
+                </kendo-excelexport-column>
+                <kendo-excelexport-column field="dateFinRepo" title="الـــى">
+                </kendo-excelexport-column>
+            
+
+
+            </kendo-excelexport>
+                <!--<button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()"
+                    class="ui-button-warning"></button>-->
+
+
+            </div>
+            <div style="text-align: right">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="محرك البحث "
+                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th [pSortableColumn]="code_grade"> أسم الراحة الطبية
+                    <p-sortIcon [field]="code_grade" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+
+
+                <th><button [disabled]="currentUserRole!='ROLE_SANTE'  && currentUserRole!='ROLE_ADMIN'"   class="btn btn-primary" style="width:50px" (click)="addConge()"> <i class="icon-plus"></i>
+                    </button></th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+            <tr>
+                <td>{{row.nomMedicale}}</td>
+
+
+                <td>
+                    <button  [disabled]="currentUserRole!='ROLE_SANTE'  && currentUserRole!='ROLE_ADMIN'"    class="btn btn-danger" (click)="delete(row)"> <i class="icon-trash"></i></button>
+                    <button  [disabled]="currentUserRole!='ROLE_SANTE'  && currentUserRole!='ROLE_ADMIN'"    class="btn btn-success" (click)="edit(row)" style="margin-left: 20px;"> <i
+                            class="icon-pencil"></i></button>
+                </td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

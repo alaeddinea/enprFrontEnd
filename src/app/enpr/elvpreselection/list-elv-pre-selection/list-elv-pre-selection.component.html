@@ -1,0 +1,316 @@
+<p-toast position="ui-toast-center"></p-toast>
+<div class="animated zoomIn">
+    <p-table id="ourTbale" [value]="entities" #dt selectionMode="single" [paginator]="true"
+        [rowsPerPageOptions]="[5,10,20]" [rows]="10" [globalFilterFields]="['numdossier','numcin',
+        'prenom','nom','prenompere','prenomgp1',
+        'prenomdemere','nomdemere','datenaissance','lib_lieu_naissance','telephone'
+        ,'adresse','cod_sexe','dateconv']">
+        <ng-template pTemplate="caption">
+            <h2 class="text-center"> قائمة المقبولين الجدد </h2>
+
+
+            <div style="text-align: left">
+                <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="قائمة المتخلفين عن الحضور"
+                    (click)="getAllEleveRetardPreselection()" style="margin-right: 0.5em;"
+                    class="ui-button-success"></button>
+
+                <output *ngIf="dataToExcel" type="output" class="k-button" (click)="excelexport.save()"
+                    id="mybutton"></output>
+
+                <kendo-excelexport [data]="dataToExcel" [fileName]="fileName" #excelexport>
+
+                    <kendo-excelexport-column field="numdossier" title="رقم ملف الإنتداب" [hidden]="false">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="numcin" title="ر.ب.ت.و">
+                    </kendo-excelexport-column>
+
+                    <kendo-excelexport-column field="prenom" title="الإسم" [hidden]="false">
+                    </kendo-excelexport-column>
+                    
+                    <kendo-excelexport-column field="prenompere" title="إسم الأب">
+                    </kendo-excelexport-column>
+                    
+                    <kendo-excelexport-column field="prenomgp1" title="إسم الجد">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="nom" title="اللقب">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="gouvernorat" title="الولاية" [hidden]="false">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="adresse" title="العنوان" [hidden]="false">
+                    </kendo-excelexport-column>
+                    
+                    <kendo-excelexport-column field="telephone" title="الهاتف">
+                    </kendo-excelexport-column>
+
+
+
+
+                </kendo-excelexport>
+                <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF"
+                    class="ui-button-warning"></button>
+
+            </div>
+            <div style="text-align: center">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>
+                            <div class="alert alert-success">
+                                العدد الجملي للمقبولين : <strong>{{countForALLaccepted}}</strong>
+                            </div>
+                        </h4>
+                        <h4>
+                            <!--    <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="قائمة المتيقسن  "
+                            (click)="getAllEleveRetardPreselectionTotal()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+            
+                            <output *ngIf="dataToExcel" type="output" class="k-button" (click)="excelexport.save()" id="mybuttonRestTotal"></output>
+            
+                            <kendo-excelexport  [data]="dataToExcelRestTotal"  [fileName]="fileName" #excelexport>
+                        
+                              <kendo-excelexport-column field="numdossier" title="رقم ملف الإنتداب" [hidden]="false">
+                              </kendo-excelexport-column>
+                                <kendo-excelexport-column field="numcin" title="ر.ب.ت.و">
+                                </kendo-excelexport-column>
+                                
+                                <kendo-excelexport-column field="prenom" title="الإسم" [hidden]="false">
+                                </kendo-excelexport-column>
+                                <kendo-excelexport-column field="nom" title="اللقب">
+                                </kendo-excelexport-column>
+                                <kendo-excelexport-column field="gouvernorat" title="الولاية" [hidden]="false">
+                                </kendo-excelexport-column>
+                                
+                                <kendo-excelexport-column field="telephone" title="الهاتف">
+                                </kendo-excelexport-column>
+                          
+            
+                          
+            
+                          </kendo-excelexport>-->
+                            <div class="alert alert-danger">
+                                العدد المتبقي : <strong> {{countTotalRest}}</strong>
+                            </div>
+
+                        </h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>
+                            <div class="alert alert-info">
+                                العدد المقبولين خلال هذا اليوم : <strong>{{countFortoday}}</strong>
+                            </div>
+
+                        </h4>
+                        <h4> 
+                            <div class="alert alert-success">
+                                [   <strong>{{countForBoy}}</strong>  ذكور  ]
+                                [   <strong>{{countForGirl}}</strong>  إناث  ]
+                           
+                              </div>
+                        </h4>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div style="text-align: right">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="محرك البحث  العام"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                </div>
+                <div style="text-align: center">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="رقم بطاقة التعريف الوطنية  "
+                        (input)="dt.filter($event.target.value, 'numcin')" style="width:auto">
+                </div>
+                <div style="text-align: left">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="رقم  الملف  "
+                        (input)="dt.filter($event.target.value, 'numdossier')" style="width:auto">
+                </div>
+                <div style="text-align: left">
+                    <input type="date" #dateConvElv (change)='filterByDate(dateConvElv.value)' pInputText size="50" placeholder=" تاريخ الإستدعاء ">
+                    <!--
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="date" pInputText size="50" placeholder=" تاريخ الإستدعاء "
+                        (input)="dt.filter($event.target.value, 'dateconv')" style="width:auto">
+                        -->
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="numdossier"> رقم الملف
+                    <p-sortIcon field="numdossier" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+                <th pSortableColumn="numcin"> ر.ب.ت.و
+                    <p-sortIcon field="numcin" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+         
+                <th pSortableColumn="prenom"> الإسم
+                    <p-sortIcon field="prenom" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+
+                <th pSortableColumn="nom"> اللقب
+                    <p-sortIcon field="nom" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+                
+           
+                <th pSortableColumn="prenompere"> إسم الأب
+                    <p-sortIcon field="prenompere" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+              
+                <th pSortableColumn="prenomgp1"> إسم الجد
+                    <p-sortIcon field="prenomgp1" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+                
+                <th pSortableColumn="prenomdemere"> إسم الأم و لقبها
+                    <p-sortIcon [field]="prenomdemere" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+            
+                <th pSortableColumn="gouvernorat"> الولاية
+                    <p-sortIcon field="gouvernorat" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+              
+                <th pSortableColumn="datenaissance"> تاريخ الولادة
+                    <p-sortIcon [field]="datenaissance" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+           
+                <th pSortableColumn="lib_lieu_naissance"> مكان الولادة
+                    <p-sortIcon field="lib_lieu_naissance" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+             
+             
+                <th pSortableColumn="telephone"> الهاتف
+                    <p-sortIcon field="telephone" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+             
+                <th pSortableColumn="cod_sexe"> الجنس
+                    <p-sortIcon field="cod_sexe" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+            
+                <th pSortableColumn="dateconv"> تاريخ الإستدعاء
+                    <p-sortIcon field="dateconv" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+                <th></th>
+                <!--<th><button class="btn btn-primary" style="width:50px" (click)="addConge()"> <i class="icon-plus"></i>
+                    </button></th>-->
+            </tr>
+  
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+            <tr>
+                <td>{{row.numdossier}}</td>
+                <td>{{row.numcin}}</td>
+                <td>{{row.prenom}}</td>
+                <td>{{row.nom}}</td>
+                <td>{{row.prenompere}}</td>
+                <td>{{row.prenomgp1}}</td>
+                <td>{{row.prenomdemere}} {{row.nomdemere}}</td>
+                <td>{{row.gouvernorat}}</td>
+                <td>{{row.datenaissance | date: 'dd/MM/yyyy'}}</td>
+                <td>{{row.lib_lieu_naissance}}</td>
+
+                <td>{{row.telephone}}</td>
+
+                <td *ngIf="row.cod_sexe==0">ذكر</td>
+                <td *ngIf="row.cod_sexe==1">أنثى</td>
+                <td>{{row.dateconv | date: 'dd/MM/yyyy'}}</td>
+                <td><button  [disabled]="currentUserRole!='ROLE_USER' && currentUserRole!='ROLE_MANIPULATION' && currentUserRole!='ROLE_ADMIN'"   class="btn btn-primary" style="width:50px" (click)="accepter(row)"> <i
+                            class="fa fa-user-plus" aria-hidden="true"></i> قبول
+                    </button></td>
+
+
+                <!-- <td>
+                    <button class="btn btn-danger" (click)="delete(row)"> <i class="icon-trash"></i></button>
+                    <button class="btn btn-success" (click)="edit(row)" style="margin-left: 20px;"> <i
+                            class="icon-pencil"></i></button>
+                </td>
+                -->
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

@@ -1,0 +1,33 @@
+
+<div class="animated zoomIn" >
+    <div class="card card-accent-primary">
+            <div class="card-header">
+                <h2 class="text-center">ادراج</h2>
+            </div>
+     <div class="card-body">
+
+        <div class="col-md-6 user-container">
+
+
+            <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+              <div class="form-group">
+                <label for="nomPenalite">إسم العقوبة:</label>
+                <input formControlName="nomPenalite" name="nomPenalite" class="form-control" id="nomPenalite">
+              </div>
+
+              <div class="form-group">
+                <label for="typePenalite"> درجة العقوبة :</label>
+                <p-dropdown [options]="typePenalite" formControlName="typePenalite"></p-dropdown>
+              </div>
+
+              <button [disabled]="!addForm.valid" class="btn btn-success" ><i class="icon-plus"></i></button>
+
+            </form>
+        </div>
+
+    </div>
+
+    </div>
+
+    </div>

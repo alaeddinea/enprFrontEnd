@@ -1,0 +1,31 @@
+
+<div class="animated zoomIn">
+    <div class="card card-accent-primary">
+      <div class="card-header">
+        <h2 class="text-center"> تحيين  حالة مدنية</h2>
+      </div>
+      <div class="card-body">
+  
+        <div class="col-md-6 user-container">
+  
+  
+          <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  
+            <div class="form-group">
+              <label for="code_etatcivil"> الرمز:</label>
+              <input type="text" formControlName="code_etatcivil" name="code_etatcivil" class="form-control" id="code_etatcivil">
+            </div>
+            <div class="form-group">
+              <label for="libelle_etatcivil">  الحالة المدنية:</label>
+              <input type="text" formControlName="libelle_etatcivil" name="libelle_etatcivil" class="form-control" id="libelle_etatcivil">
+            </div>
+            <button [disabled]="!addForm.valid" class="btn btn-success"><i class="icon-plus"></i></button>
+          </form>
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </div>
+  

@@ -1,0 +1,54 @@
+<div class="card card-accent-primary">
+    <div class="card-header">
+      <h2 class="text-center">إدراج </h2>
+    </div>
+    <div class="card-body">
+      <div class="col-md-6 user-container">
+  
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+          <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-4">
+                رقم الدورة *:
+              </div>
+              <div class="ui-grid-col-8">
+               
+                <p-dropdown [options]="session"  placeholder="إختيار الدورة" formControlName="session"  [filter]="true" id="session" name="session" ></p-dropdown>
+              </div>
+            </div>
+  
+  
+  
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-4">
+                إسم الفوج *:
+              </div>
+              <div class="ui-grid-col-8">
+                <input type="text" formControlName="nomGroup" name="nomGroup" class="form-control" id="nomGroup">
+  
+              </div>
+            </div>
+  
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-4">
+                آمر الفوج *:
+              </div>
+              <div class="ui-grid-col-8">
+                <input type="text" formControlName="commandGroup" name="commandGroup" class="form-control" id="commandGroup">
+  
+              </div>
+            </div>
+  
+  
+  
+          </div>
+  
+  
+          <p-button type="ngSubmit" icon="pi pi-plus" label="نسجيل"></p-button>
+    
+        </form>
+      </div>
+  
+    </div>
+  
+  </div>

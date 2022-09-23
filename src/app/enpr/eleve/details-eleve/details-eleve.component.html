@@ -1,0 +1,180 @@
+<div class="row text-center">
+    <div *ngIf="!eleve" class="col-md-6 col-sm-6">
+        <div class="user">
+            <img class="img-circle" src="assets/img/avatars/lod1.gif">
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <div class="card-container">
+            <div class="card" *ngIf="eleve">
+                <div class="front">
+                    <div class="cover">
+                        <img src="assets/img/avatars/rotating_card_thumb2.png">
+                    </div>
+                    <div class="user" *ngIf="!imageBlob">
+                        <img class="img-circle" src="assets/img/avatars/lod.gif">
+                    </div>
+                    <div class="user" *ngIf="imageBlob">
+                        <img class="img-circle" src="data:image/png;base64,{{imageBlob}}">
+                    </div>
+                    <div class="content">
+                        <div class="main">
+                            <h3 class="name">{{eleve.prenomEl}} {{eleve.nomEl}} </h3>
+                            <p class="profession">{{eleve.cinEl}}</p>
+                            <p class="text-center"  *ngIf="eleve.gouvernorat"> {{eleve.gouvernorat.libelle_gouvernorat}},
+                               <span *ngIf='eleve.delegation'> {{eleve.delegation.libelle_delegation}}</span>, {{eleve.rueEl}}, {{eleve.codePostaleEl}}
+                            </p>
+                        </div>
+                        <div class="footer">
+                            <div class="stats">
+
+                                <p>
+                                    <i class="fa fa fa-phone"></i>
+                                    {{eleve.telFamilleEl}}
+                                </p>
+                            </div>
+                            <div class="stats">
+
+                                <p>
+                                    <i class="fa  fa-mobile"></i>
+                                    {{eleve.telEl}}
+                                </p>
+                            </div>
+
+                            <div class="stats">
+                                <p>
+                                    <i class="fa fa fa-phone-square"></i>
+                                    {{eleve.fixeFamilleEl}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end front panel -->
+                <div class="back">
+                    <div class="header">
+                        <h5 class="motto"> رفم ملف الإنتداب : {{eleve.numDossierRecrueEl}}</h5>
+                    </div>
+                    <div class="content">
+                        <div class="main">
+                            <h4 class="text-center" *ngIf="eleve.grade">{{eleve.grade.libelle_grade}}</h4>
+                            <p class="text-center"  *ngIf="eleve.session">الدورة {{eleve.session.numSession}} , {{eleve.group.nomGroup}} ,
+                                السرية {{eleve.company.numCompany}} الفصيل {{eleve.section.numSection}}
+                            </p>
+
+                            <div class="stats-container">
+                                <div class="stats">
+                                    <h4>{{countRepo}}</h4>
+                                    <p>
+                                        راحة طبية
+                                    </p>
+                                </div>
+                                <div class="stats">
+                                    <h4>{{countConsultation}}</h4>
+                                    <p>
+                                      العيادات الطبية
+                                    </p>
+                                </div>
+                                <div class="stats">
+                                    <h4>{{countPenalite}}</h4>
+                                    <p>
+                                        العقوبات
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="social-links text-center">
+                            <!--<a href="https://creative-tim.com" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
+                            <a href="https://creative-tim.com" class="google"><i
+                                    class="fa fa-google-plus fa-fw"></i></a>
+                            <a href="https://creative-tim.com" class="twitter"><i class="fa fa-twitter fa-fw"></i></a>-->
+                            <button (click)="print()" class="btn btn-block btn-warning">طباعة<i class="fa fa-file-pdf-o"
+                                aria-hidden="true"></i>
+                        </button>
+                        </div>
+                    </div>
+                </div> <!-- end back panel -->
+            </div> <!-- end card -->
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6">
+        <div class="ui-g ui-fluid ">
+            <div class="ui-g-12 ui-md-2 ui-g-offset-1">
+                <div class="card" style="width: 10rem;">
+                    <img class="card-img-top" src="assets/img/details/medicale.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">الملف الصحي</h5>
+                        <p class="card-text">خاص بالمصحة </p>
+                        <button class="btn btn-info" (click)="detailsEleveMedicale()"> <i class="icon-info"></i>
+                          {{textMedicaleButtonAffiche}} </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-g-offset-1 ">
+                <div class="card" style="width: 10rem;">
+                    <img class="card-img-top" src="assets/img/details/psychologique.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">الملف النفسي</h5>
+                        <p class="card-text"> خاص بالنفسي </p>
+                        <button class="btn btn-info" (click)="detailsEleveTestpsy()"> <i class="icon-info"></i>
+                          {{textTestpsyButtonAffiche}} </button>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-2 ui-g-offset-1 ">
+                <div class="card" style="width: 10rem;">
+                    <img class="card-img-top" src="assets/img/details/penalite.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">ملف العقوبات</h5>
+                        <p class="card-text">جميع العقوبات </p>
+                        <button class="btn btn-info" (click)="detailsElevePenalite()"> <i
+                                class="icon-info"></i>{{textButtonAffiche}} </button>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-2 ">
+                <div class="card" style="width: 10rem;">
+                    <img class="card-img-top" src="assets/img/details/mesuration.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"> المقاييس</h5>
+                        <p class="card-text">اللباس العسكري </p>
+
+                        <button class="btn btn-info" (click)="detailsEleveMesuration()"> <i class="icon-info"></i>
+                            {{textMesurationButtonAffiche}} </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class=" text-center">
+<app-suivie-mesure  [tabclickedMesuration]="eleveTesMesuration"></app-suivie-mesure>
+</div>
+<div class=" text-center">
+  <app-list-penalite-eleve *ngIf="eleve" [idEleve]="eleve.id" [tabclicked]="elevePenaliteClicked"></app-list-penalite-eleve>
+
+</div>
+<div class=" text-center">
+<app-suivie-testpsy *ngIf="eleve" [idEleve]="eleve.id" [tabclickedTestpsy]="eleveTestpsyClicked"></app-suivie-testpsy>
+</div>
+<div class=" text-center">
+<app-list-rendezvous *ngIf="eleve" [idEleve]="eleve.id" [tabclickedMedicale]="eleveMedicaleClicked"></app-list-rendezvous>
+</div>
+
+<div class=" text-center">
+<app-suivie-consultation *ngIf="eleve" [idEleve]="eleve.id" [tabclickedMedicale]="eleveMedicaleClicked"></app-suivie-consultation>
+</div>
+<div class=" text-center">
+<app-suivie-repo *ngIf="eleve" [idEleve]="eleve.id" [tabclickedMedicale]="eleveMedicaleClicked"></app-suivie-repo>
+</div>
+<div class=" text-center">
+  <app-suivie-sante *ngIf="eleve" [idEleve]="eleve.id" [tabclickedMedicale]="eleveMedicaleClicked"></app-suivie-sante>
+</div>
+
+

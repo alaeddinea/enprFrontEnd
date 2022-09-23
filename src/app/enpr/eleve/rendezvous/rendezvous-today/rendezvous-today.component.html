@@ -1,0 +1,229 @@
+<p-toast position="ui-toast-center"></p-toast>
+<div class="animated zoomIn">
+    <p-table id="ourTbale" [value]="entities" #dt selectionMode="single" [paginator]="true"
+        [rowsPerPageOptions]="[5,10,20]" [rows]="10" [globalFilterFields]="['categorieGrade','libelle_grade']">
+        <ng-template pTemplate="caption">
+            <h2 class="text-center">قائمة المواعيد </h2>
+            <div style="text-align: left">
+
+                <p>
+                    مــــــــن
+                    <input [(ngModel)]='dateDebut' type="date">
+                    إلــــــى
+
+                    <input [(ngModel)]='dateFin' type="date">
+                    <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="  قائــمة المواعيد "
+                        (click)="listRedezVous()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+                        
+                </p>
+
+
+                <output *ngIf="dataToExcel" type="output" class="k-button" (click)="excelexport.save()"
+                    id="mybutton"></output>
+
+                <kendo-excelexport [data]="dataToExcel" [fileName]="fileName" #excelexport>
+                    <kendo-excelexport-column field="typeRendezvous" title="نوع العيادة" [hidden]="false">
+                    </kendo-excelexport-column>
+                  <kendo-excelexport-column field="dateRendezvous" title="التاريخ">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="remarqueRendezvous" title="ملاحضات">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.numDossierRecrueEl" title="رقم الملف">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.cinEl" title="ر.ب.ت.و">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.grade.libelle_grade" title="الرتبة">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.prenomEl" title="الإسم" [hidden]="false">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.identitePereEl" title="هوية الأب">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.nomEl" title="اللقب">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.etatcivil.libelle_etatcivil" title="الحالة المدنية">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.session.numSession" title="الدورة">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.group.nomGroup" title="الفوج">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.company.numCompany" title="السرية">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="eleve.section.numSection" title="الفصيل">
+                    </kendo-excelexport-column>
+                 
+                </kendo-excelexport>
+                <!--<button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()"
+                    class="ui-button-warning"></button>-->
+
+
+            </div>
+            <div style="text-align: right">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="محرك البحث "
+                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="typeRendezvous"> نوع الموعد
+                    <p-sortIcon field="typeRendezvous" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+                <th pSortableColumn="dateRendezvous"> التاريخ
+                    <p-sortIcon field="dateRendezvous" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+
+                <th pSortableColumn="remarqueRendezvous"> الملاحظات
+                    <p-sortIcon field="remarqueRendezvous" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+                <th pSortableColumn="eleve.numDossierRecrueEl"> رقم الملف
+                    <p-sortIcon field="eleve.numDossierRecrueEl" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+                <th pSortableColumn="eleve.cinEl"> ر.ب.ت.و
+                    <p-sortIcon field="eleve.cinEl" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+
+
+                <th pSortableColumn="eleve.grade.libelle_grade"> الرتبة
+                    <p-sortIcon field="eleve.grade.libelle_grade" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+
+                <th pSortableColumn="eleve.prenomEl"> الإسم
+                    <p-sortIcon field="eleve.prenomEl" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+
+
+                    </p-sortIcon>
+
+                </th>
+                <th pSortableColumn="eleve.identitePereEl"> هوية الأب
+                    <p-sortIcon field="eleve.identitePereEl" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+                <th pSortableColumn="eleve.nomEl"> اللقب
+                    <p-sortIcon field="eleve.nomEl" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+             
+                <th pSortableColumn="eleve.sexeEl"> الجنس
+                    <p-sortIcon field="eleve.sexeEl" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+                <th pSortableColumn="eleve.etatcivil.libelle_etatcivil"> الحالة المدنية
+                    <p-sortIcon field="eleve.etatcivil.libelle_etatcivil" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+                <th pSortableColumn="eleve.session"> الدورة
+                    <p-sortIcon field="eleve.session" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+                <th pSortableColumn="eleve.group"> الفوج
+                    <p-sortIcon field="eleve.group" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+                <th pSortableColumn="eleve.company"> السرية
+                    <p-sortIcon field="eleve.company" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+                <th pSortableColumn="eleve.section"> الفصيل
+                    <p-sortIcon field="eleve.section" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                </th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+            <tr>
+                <td>{{row.typeRendezvous}}</td>
+                <td>{{row.dateRendezvous| date: 'dd/MM/yyyy hh:mm a'}}</td>
+
+                <td>{{row.remarqueRendezvous}}</td>
+                <td>{{row.eleve.numDossierRecrueEl}}</td>
+                <td>{{row.eleve.cinEl}}</td>
+                <td>
+                    <div *ngIf="row.eleve.grade">{{row.eleve.grade.libelle_grade}}</div>
+                </td>
+
+                <td>{{row.eleve.prenomEl}} </td>
+                <td>{{row.eleve.identitePereEl}}</td>
+                <td>{{row.eleve.nomEl}}</td>
+               
+                <td *ngIf="row.eleve.sexeEl=='0'">ذكر</td>
+                <td *ngIf="row.eleve.sexeEl=='1'">أنثى</td>
+                <td *ngIf="row.eleve.sexeEl==null"></td>
+                <td>
+                    <div *ngIf="row.eleve.etatcivil"> {{row.eleve.etatcivil.libelle_etatcivil}} </div>
+                </td>
+                <td>
+                    <div *ngIf="row.eleve.session"> {{row.eleve.session.numSession}} </div>
+                </td>
+
+
+                <td>
+                    <div style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"
+                        *ngIf="row.eleve.group">{{row.eleve.group.nomGroup}} </div>
+                </td>
+
+
+                <td>
+                    <div *ngIf="row.eleve.company">{{row.eleve.company.numCompany}}</div>
+                </td>
+
+
+                <td>
+                    <div *ngIf="row.eleve.section">{{row.eleve.section.numSection}} </div>
+                </td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

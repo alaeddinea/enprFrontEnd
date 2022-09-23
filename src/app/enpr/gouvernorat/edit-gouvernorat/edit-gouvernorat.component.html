@@ -1,0 +1,32 @@
+
+<div class="animated zoomIn" >
+  <div class="card card-accent-primary">
+          <div class="card-header">
+              <h2 class="text-center">ادراج</h2>
+          </div>
+   <div class="card-body">
+  
+      <div class="col-md-6 user-container">
+  
+          <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+          <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+          
+            
+             
+            <div class="form-group">
+              <label for="libellegouv">التسميـــــة:</label>
+              <input formControlName="libelle_gouvernorat"  name="libelle_gouvernorat" class="form-control" id="libellegouv">
+            </div>
+           
+            
+            <p-button type="ngSubmit" icon="pi pi-plus" label="نسجيل"></p-button>
+  
+          </form>
+      </div>
+  
+  </div>
+  
+  </div>
+  
+  </div>

@@ -1,0 +1,18 @@
+
+<div class="container">
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<p-organizationChart [value]="data" selectionMode="single" [(selection)]="selectedNode" (onNodeSelect)="onNodeSelect($event)"
+styleClass="company">
+<ng-template let-node pTemplate="person">
+    <div class="node-header ui-corner-top">{{node.label}}</div>
+    <div class="node-content">
+        
+        <div>{{node.data.name}}</div>
+    </div>
+</ng-template>
+<ng-template let-node pTemplate="department">
+    {{node.label}}
+</ng-template>
+</p-organizationChart>
+</div>
